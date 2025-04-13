@@ -1,0 +1,29 @@
+function nextStep(step) {
+  document.querySelectorAll('.choice').forEach(c => c.classList.remove('active'));
+  document.getElementById('step' + step).classList.add('active');
+}
+
+function creaPacco() {
+  const animal = document.getElementById('animal').value;
+  const frolla = document.getElementById('frolla').value;
+  const gusto = document.getElementById('gusto').value;
+  const gocce = document.getElementById('gocce').value;
+  const resultDiv = document.getElementById('result');
+
+  // Controllo: se l'utente non ha scelto una goccia vera
+  if (!gocce) {
+    alert("Per favore seleziona le gocce di cioccolato prima di creare il tuo pacco! 🍫");
+    return;
+  }
+
+  resultDiv.innerHTML = `<h2>Il tuo pacco wild 🌿:</h2>
+    <div class='jungle-emoji'>🌴🌻🌳🦁🦓</div>
+    <p><strong>Spirito guida:</strong> ${animal}</p>
+    <p><strong>Frolla:</strong> ${frolla}</p>
+    <p><strong>Gusto:</strong> ${gusto}</p>
+    <p><strong>Gocce:</strong> ${gocce}</p>
+    <button class='order-button'>Ordina il tuo pacco 🚛</button>`;
+
+  document.querySelectorAll('.choice').forEach(c => c.classList.remove('active'));
+  resultDiv.style.display = 'block';
+}
