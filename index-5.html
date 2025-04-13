@@ -1,0 +1,171 @@
+
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crea il tuo pacco</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff8f0;
+      color: #d62828;
+      text-align: center;
+      padding: 20px;
+      background-image: url('https://images.unsplash.com/photo-1585252161707-0dca55157cd6?fit=crop&w=1600&q=80');
+      background-size: cover;
+      background-attachment: fixed;
+      animation: backgroundMove 30s linear infinite;
+    }
+    @keyframes backgroundMove {
+      0% {background-position: 0 0;}
+      100% {background-position: 1000px 0;}
+    }
+    h1 {
+      font-size: 3em;
+      margin-bottom: 20px;
+      text-shadow: 2px 2px #fff;
+    }
+    .choice {
+      background: rgba(255,255,255,0.95);
+      margin: 20px auto;
+      padding: 20px;
+      border-radius: 15px;
+      max-width: 500px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease-in-out;
+      display: none;
+    }
+    .choice.active {
+      display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 2px solid #d62828;
+      font-size: 1.2em;
+    }
+    button {
+      background-color: #d62828;
+      color: white;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    button:hover {
+      background-color: #b22222;
+      transform: scale(1.05);
+    }
+    .result {
+      background: rgba(255,255,255,0.98);
+      margin-top: 30px;
+      padding: 20px;
+      border-radius: 15px;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+      animation: fadeIn 1s ease-in-out;
+      display: none;
+    }
+    .order-button {
+      margin-top: 20px;
+      padding: 15px;
+      font-size: 1.5em;
+      background-color: #d62828;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+    }
+    .order-button:hover {
+      background-color: #b22222;
+      transform: scale(1.1);
+    }
+    .jungle-emoji {
+      font-size: 2em;
+      margin-top: 10px;
+      animation: float 2s ease-in-out infinite alternate;
+    }
+    @keyframes float {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-10px); }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Crea il tuo pacco 🌿💚</h1>
+
+  <div class="choice active" id="step1">
+    <h2>1. Scegli il tuo spirito guida 🌿</h2>
+    <select id="animal">
+      <option value="Giraffa">🦒 Giraffa</option>
+      <option value="Leone">🦁 Leone</option>
+      <option value="Zebra">🦓 Zebra</option>
+    </select>
+    <button onclick="nextStep(2)">Avanti ➡️</button>
+  </div>
+
+  <div class="choice" id="step2">
+    <h2>2. Scegli la tua frolla 🍞</h2>
+    <select id="frolla">
+      <option value="Wild">Wild 🦜</option>
+      <option value="Normale">Normale 🌍</option>
+      <option value="Dark">Dark 🌃</option>
+    </select>
+    <button onclick="nextStep(3)">Avanti ➡️</button>
+  </div>
+
+  <div class="choice" id="step3">
+    <h2>3. Scegli il tuo gusto 🍓</h2>
+    <select id="gusto">
+      <option value="Cocco">🥥 Cocco</option>
+      <option value="Caramello">🍬 Caramello</option>
+      <option value="Normale">🍄 Normale</option>
+    </select>
+    <button onclick="nextStep(4)">Avanti ➡️</button>
+  </div>
+
+  <div class="choice" id="step4">
+    <h2>4. Scegli le tue gocce 🍫</h2>
+    <select id="gocce">
+      <option value="Cioccolato al latte">🍫 Cioccolato al latte</option>
+      <option value="Cioccolato fondente">🍪 Cioccolato fondente</option>
+    </select>
+    <button onclick="creaPacco()">Crea il tuo pacco! 🌧️</button>
+  </div>
+
+  <div class="result" id="result"></div>
+
+  <script>
+    function nextStep(step) {
+      document.querySelectorAll('.choice').forEach(c => c.classList.remove('active'));
+      document.getElementById('step' + step).classList.add('active');
+    }
+
+    function creaPacco() {
+      const animal = document.getElementById('animal').value;
+      const frolla = document.getElementById('frolla').value;
+      const gusto = document.getElementById('gusto').value;
+      const gocce = document.getElementById('gocce').value;
+      const resultDiv = document.getElementById('result');
+
+      resultDiv.innerHTML = `<h2>Il tuo pacco wild 🌿:</h2>
+        <div class='jungle-emoji'>🌴🌻🌳🦁🦓</div>
+        <p><strong>Spirito guida:</strong> ${animal}</p>
+        <p><strong>Frolla:</strong> ${frolla}</p>
+        <p><strong>Gusto:</strong> ${gusto}</p>
+        <p><strong>Gocce:</strong> ${gocce}</p>
+        <button class='order-button'>Ordina il tuo pacco 🚛</button>`;
+
+      document.querySelectorAll('.choice').forEach(c => c.classList.remove('active'));
+      resultDiv.style.display = 'block';
+    }
+  </script>
+
+</body>
+</html>
